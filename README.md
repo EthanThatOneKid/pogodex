@@ -2,7 +2,7 @@
 Pokedex for Pokemon Go with stats and data straight from the source!
 
 ## Features
-* stuff
+* [Pokemon Go master data parser](src/components/helpers/master_parser.js)
 * stuff
 * stuff
 

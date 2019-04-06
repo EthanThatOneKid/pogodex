@@ -21,7 +21,7 @@ export default class MasterParser {
       const move = combatMove.uniqueId;
       moves[move] = {
         "type": combatMove.type.split("_").pop().toLowerCase(),
-        "name": combatMove.vfxName,
+        "name": move.replace(/_fast/i, ""),
         "power": combatMove.power
       };
       return moves;
@@ -37,20 +37,21 @@ export default class MasterParser {
       .reduce((dex, {templateId, pokemonSettings}) => {
         const num = MasterParser.num(templateId);
         dex[num] = {
-          "name": pokemonSettings.pokemonId.toLowerCase(),
+          "name": pokemonSettings.pokemonId,
           "candy": MasterParser.candy(pokemonSettings),
           "types": MasterParser.types(pokemonSettings),
           "stats": MasterParser.stats(pokemonSettings),
           "evolution": MasterParser.evolution(pokemonSettings),
           "moves": this.lookupMoves(pokemonSettings),
           "thirdMove": pokemonSettings.thirdMove,
-          "buddyDistance": pokemonSettings.kmBuddyDistance
+          "buddyDistance": pokemonSettings.kmBuddyDistance,
+          "icon": `https://assets.thesilphroad.com/img/pokemon/icons/96x96/${num}.png`
         };
         return dex;
       }, {});
 
     this.registered = true;
-    return this;
+    return this.dex;
 
   }
 
@@ -77,7 +78,7 @@ export default class MasterParser {
   }
 
   static candy(pokemonSettings) {
-    return pokemonSettings.familyId.split("_").pop().toLowerCase();
+    return pokemonSettings.familyId.split("_").pop();
   }
 
   static types(pokemonSettings) {
