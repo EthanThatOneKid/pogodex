@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 
-//import Entry from './components/entry.js';
+import Entry from './components/entry.js';
 import MasterParser from './components/helpers/master_parser.js';
 
 export default class App extends Component {
@@ -22,16 +22,15 @@ export default class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        {
-          Object.values(this.state.dex).map(p => {
-            return (
-              <img key={p.name} src={p.icon}></img>
-            );
-          })
-        }
-      </div>
-    );
+    return Object.values(this.state.dex)
+      .map(p => <Entry data={p}/>); 
+    // return (
+    //   <div className="App">
+    //     {
+    //       Object.values(this.state.dex)
+    //         .map(p => <Entry data={p}/>)
+    //     }
+    //   </div>
+    // );
   }
 }
