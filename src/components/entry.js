@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import colors from './helpers/colors.js';
+import types from './helpers/types.js';
 
 export default class Entry extends Component {
 
