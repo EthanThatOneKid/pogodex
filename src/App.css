@@ -13,12 +13,7 @@
   color: white;
 }
 
-.entry .info {
-  display: none;
-  z-index: 999;
-  width: 7vw;
-  height: 500px;
-}
-.entry:hover .info {
+.icon {
   display: block;
+  margin: auto;
 }

@@ -1,3 +1,6 @@
+import specials from './specials.js';
+//import fs from 'fs';
+
 export default class MasterParser {
 
   constructor() {
@@ -6,11 +9,17 @@ export default class MasterParser {
     this.registered = false;
   }
 
+  // save(path) {
+  //   const ts = (new Date()).valueOf();
+  //   fs.writeFileSync(path, JSON.stringify(this.dex));
+  // }
+
   async init() {
 
-    const url = "https://raw.githubusercontent.com/pokemongo-dev-contrib/pokemongo-game-master/master/versions/latest/GAME_MASTER.json";
-    const masterRequest = await fetch(url);
+    const masterUrl = "https://raw.githubusercontent.com/pokemongo-dev-contrib/pokemongo-game-master/master/versions/latest/GAME_MASTER.json";
+    const masterRequest = await fetch(masterUrl);
     const master = await masterRequest.json();
+
     this.moves = master["itemTemplates"]
     .filter(({templateId}) => {
       return templateId.includes("COMBAT_") &&
@@ -37,7 +46,7 @@ export default class MasterParser {
       .reduce((dex, {templateId, pokemonSettings}) => {
         const num = MasterParser.num(templateId);
         dex[num] = {
-          "name": pokemonSettings.pokemonId,
+          "name": MasterParser.name(pokemonSettings),
           "candy": MasterParser.candy(pokemonSettings),
           "types": MasterParser.types(pokemonSettings),
           "stats": MasterParser.stats(pokemonSettings),
@@ -50,19 +59,49 @@ export default class MasterParser {
         return dex;
       }, {});
 
+      for (let specialName of specials) {
+        const specialUrl = `https://raw.githubusercontent.com/pokemongo-dev-contrib/pokemongo-game-master/master/special/${specialName}`;
+        const specialRequest = await fetch(specialUrl);
+        const specialData = await specialRequest.json();
+        for (let itemTemplate of specialData.itemTemplates)
+          this.updateMoves(itemTemplate);
+      }
+
     this.registered = true;
     return this.dex;
 
   }
 
   lookupMoves(pokemonSettings) {
-    const lookup = s => this.moves[s],
+    const lookup = s => Object.assign(this.moves[s], {"event": false}),
           hasQuickMoves  = pokemonSettings.hasOwnProperty("quickMoves"),
           hasChargeMoves = pokemonSettings.hasOwnProperty("cinematicMoves");
     return {
       "quick": hasQuickMoves ? pokemonSettings.quickMoves.map(lookup) : [],
       "charge": hasChargeMoves ? pokemonSettings.cinematicMoves.map(lookup) : [],
     };
+  }
+
+  updateMoves({templateId, pokemonSettings}) {
+    const num = MasterParser.num(templateId);
+    for (let moveType of [["quickMoves", "quick"], ["cinematicMoves", "charge"]]) {
+      const existingMoves = this.dex[num].moves[moveType[1]].map(m => m.name);
+      for (let specialMove of pokemonSettings[moveType[0]]) {
+        const cleanMove = specialMove.replace(/_fast/i, "");
+        if (existingMoves.indexOf(cleanMove) === -1) {
+          this.dex[num].moves[moveType[1]].push({
+            ...this.moves[specialMove],
+            "event": true
+          });
+        }
+      }
+    }
+  }
+
+  static name({pokemonId}) {
+    return pokemonId
+      .replace(/_MALE/i, " ♂")
+      .replace(/_FEMALE/i, " ♀");
   }
 
   static evolution(pokemonSettings) {
@@ -74,7 +113,7 @@ export default class MasterParser {
       "stamina": pokemonSettings.stats.baseStamina,
       "attack": pokemonSettings.stats.baseAttack,
       "defense": pokemonSettings.stats.baseDefense
-    }
+    };
   }
 
   static candy(pokemonSettings) {
