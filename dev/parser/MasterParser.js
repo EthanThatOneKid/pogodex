@@ -109,7 +109,9 @@ module.exports = class MasterParser {
   }
 
   static evolution(pokemonSettings) {
-    return (pokemonSettings.hasOwnProperty("evolutionBranch")) ? pokemonSettings.evolutionBranch : [];
+    return (pokemonSettings.hasOwnProperty("evolutionBranch")) ?
+      pokemonSettings.evolutionBranch.map(e => Object.assign(e, {"candy": MasterParser.candy(pokemonSettings)})) :
+      [];
   }
 
   static stats(pokemonSettings) {
@@ -121,7 +123,10 @@ module.exports = class MasterParser {
   }
 
   static candy(pokemonSettings) {
-    return pokemonSettings.familyId.split("_").pop();
+    return pokemonSettings.familyId
+      .replace(/FAMILY_/i, "")
+      .replace(/_/i, " ")
+      .toLowerCase();
   }
 
   static types(pokemonSettings) {

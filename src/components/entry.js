@@ -29,13 +29,13 @@ export default class Entry extends Component {
       },
     };
     return (
-      <div style={style.div}>
+      <div id={this.data.name} style={style.div}>
         <img className="icon" src={this.data.icon}></img>
         <details>
           <summary>{this.data.name}</summary>
           <div>
 
-            <p>
+            <section>
               {
                 // make Type class
                 this.data.types.map(t => {
@@ -43,23 +43,24 @@ export default class Entry extends Component {
                   return <img src={`https://img.shields.io/badge/type-${t}-${c}.svg`}></img>;
                 })
               }
-            </p>
+            </section>
 
-            <p>
+            <section>
               <p>stats:</p>
               <Stats data={this.data.stats}/>
-            </p>
+            </section>
 
-            <p>
+            <section>
               <p>fast attacks:</p>
               {this.data.moves.quick.map(m => <Move data={m}/>)}
               <p>charge moves:</p>
               {this.data.moves.charge.map(m => <Move data={m}/>)}
-            </p>
+            </section>
 
-            <p>
-              <EvolutionBranch data={this.data.evolutionBranch}/>
-            </p>
+            <section>
+              {(!!this.data.evolution.length) ? <p>evolution:</p> : <></>}
+              {this.data.evolution.map(e => <EvolutionBranch data={e}/>)}
+            </section>
 
           </div>
 

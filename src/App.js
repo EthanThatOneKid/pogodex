@@ -1,6 +1,7 @@
 // Dependencies
 import React, {Component} from 'react';
 import './App.css';
+import dex from './db/latest.json';
 
 // Components
 import Entry from './components/entry.js';
@@ -11,19 +12,10 @@ export default class App extends Component {
 
   constructor(props) {
     super(props);
-    this.master = new MasterParser();
-    this.state = {"dex": {}};
-    this.loadDex();
-  }
-
-  async loadDex() {
-    this.setState({
-      "dex": await this.master.init()
-    });
   }
 
   render() {
-    return Object.values(this.state.dex)
+    return Object.values(dex)
       .map(p => <Entry data={p}/>);
     // return (
     //   <div className="App">
