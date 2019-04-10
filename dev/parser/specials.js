@@ -1,4 +1,9 @@
-const specials = [
+
+// +-Refer to this:---------------------------------------------------------------------+
+// | https://github.com/pokemongo-dev-contrib/pokemongo-game-master/tree/master/special |
+// +------------------------------------------------------------------------------------+
+
+module.exports = [
   "20180120_pikachu.json",
   "20180224_dratini.json",
   "20180325_bulbasaur.json",
@@ -20,5 +25,3 @@ const specials = [
   "20190216_swinhub.json",
   "20190323_treecko.json"
 ];
-
-export default specials;

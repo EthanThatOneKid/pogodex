@@ -1,7 +1,10 @@
-import specials from './specials.js';
-import fs from 'fs';
+// Dependencies
+const fs = require('fs');
+const fetch = require('node-fetch');
+const specials = require('./specials.js');
 
-export default class MasterParser {
+// MasterParser class
+module.exports = class MasterParser {
 
   constructor() {
     this.moves = {};
