@@ -4,23 +4,6 @@ const fetch = require('node-fetch');
 
 // Helpers
 const specials = require('./specials.js');
-/*
-  pkmn legacy move puppeteer scraper from:
-  https://pokemongo.gamepress.gg/legacy-pokemon-move-list
-  using sel: '#sort-table > tbody'
-*/
-
-// ***************************************
-// BIG TODO:
-// REWRITE DEX SCRAPER TO UTILIZE THIS FILE INSTEAD:
-// https://raw.githubusercontent.com/pokemongo-dev-contrib/pokemongo-json-pokedex/master/output/pokemon.json
-// MOVES FROM THIS:
-// https://github.com/pokemongo-dev-contrib/pokemongo-json-pokedex/blob/master/output/move.json
-// AND ADD DEX ENTRIES FROM:
-// https://github.com/pokemongo-dev-contrib/pokemongo-json-pokedex/blob/master/output/locales/en-US/pokemon.json
-// SHINY AVAILABLE: (fetch.text() clean js and JSON.parse())
-// https://leekduck.com/assets/shiny/pms.js
-// ***************************************
 
 // MasterParser class
 module.exports = class MasterParser {
