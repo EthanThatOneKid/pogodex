@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import colors from './helpers/colors.js';
 
 // Components
+import Type from './type.js';
 import Move from './move.js';
 import Stats from './stats.js';
 import EvolutionBranch from './evolution-branch.js';
@@ -36,13 +37,7 @@ export default class Entry extends Component {
           <div>
 
             <section>
-              {
-                // make Type class
-                this.data.types.map(t => {
-                  const c = colors[t][0];
-                  return <img src={`https://img.shields.io/badge/type-${t}-${c}.svg`}></img>;
-                })
-              }
+              {this.data.types.map(t => <Type data={t}/>)}
             </section>
 
             <section>
