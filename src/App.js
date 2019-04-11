@@ -17,13 +17,6 @@ export default class App extends Component {
   render() {
     return Object.values(dex)
       .map(p => <Entry data={p}/>);
-    // return (
-    //   <div className="App">
-    //     {
-    //       Object.values(this.state.dex)
-    //         .map(p => <Entry data={p}/>)
-    //     }
-    //   </div>
-    // );
   }
+  
 }

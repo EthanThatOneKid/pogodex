@@ -17,23 +17,29 @@ export default class Entry extends Component {
     super(props);
     this.data = this.props.data;
     this.grad = colors[this.data.types[0]];
+    this.state = {"display": true};
+  }
+
+  toggle(display) {
+    this.setState({
+      "display": display // !this.state.display
+    });
   }
 
   render() {
     const style = {
       "div": {
-        "display": "inline-block",
-        // "width": "7vw",
-        "margin": "0",
-        "position": "relative",
-        "backgroundImage": `radial-gradient(#${this.grad[0]}, #${this.grad[1]})`
-      },
+        "backgroundImage": `radial-gradient(#${this.grad[0]}, #${this.grad[1]})`,
+        "display": this.state.display ? "inline-block" : "none"
+      }
     };
     return (
-      <div id={this.data.name} style={style.div}>
-        <img className="icon" src={this.data.icon}></img>
+      <div className="entry" id={this.data.name} style={style.div}>
         <details>
-          <summary>{this.data.name}</summary>
+          <summary>
+            <img className="icon" src={this.data.icon}></img>
+            {this.data.name}
+          </summary>
           <div>
 
             <section>

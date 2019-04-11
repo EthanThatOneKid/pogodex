@@ -13,6 +13,16 @@
   color: white;
 }
 
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.entry {
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .icon {
   display: block;
   margin: auto;
