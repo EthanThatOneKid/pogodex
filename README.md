@@ -8,6 +8,7 @@ This will scrape the latest version of the Pokemon Go Master file and will save 
 
 ## Deployment
 ### Heroku
+* [Heroku App](https://pogodex.herokuapp.com)
 * Make sure to `settings > buildpacks > add buildpack > https://github.com/mars/create-react-app-buildpack` along with the standard node buildpack.
 
 ---
