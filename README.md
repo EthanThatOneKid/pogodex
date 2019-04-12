@@ -6,6 +6,10 @@ Pokedex for Pokemon Go with stats and data straight from the source!
 Run `npm run scrape` from the root of this repository.
 This will scrape the latest version of the Pokemon Go Master file and will save it as `src/db/latest.json` to be used in the app. The code for the parser can be found [here](dev/parser/). Notice: the [`specials.js`](dev/parser/specials.js) file must be updated each time there is a special in-game event.
 
+## Deployment
+### Heroku
+* Make sure to `settings > buildpacks > add buildpack > https://github.com/mars/create-react-app-buildpack` along with the standard node buildpack.
+
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
