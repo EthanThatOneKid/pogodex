@@ -19,7 +19,7 @@ const specials = require('./specials.js');
 // AND ADD DEX ENTRIES FROM:
 // https://github.com/pokemongo-dev-contrib/pokemongo-json-pokedex/blob/master/output/locales/en-US/pokemon.json
 // SHINY AVAILABLE: (fetch.text() clean js and JSON.parse())
-// https://leekduck.com/assets/shiny/pms.js
+// https://raw.githubusercontent.com/Rplus/Pokemon-shiny/blob/master/pms.js
 // ***************************************
 
 // MasterParser class
