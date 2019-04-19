@@ -1,6 +1,7 @@
 // Dependencies
 const fs = require('fs');
 const fetch = require('node-fetch');
+const cheerio = require('cheerio');
 
 // Helpers
 const specials = require('./specials.js');

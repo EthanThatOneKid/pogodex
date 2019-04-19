@@ -24,6 +24,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "node-fetch": "^2.3.0"
   }
 }
