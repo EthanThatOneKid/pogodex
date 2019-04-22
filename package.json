@@ -24,6 +24,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "node-fetch": "^2.3.0",
     "puppeteer": "^1.14.0"
   }
 }
