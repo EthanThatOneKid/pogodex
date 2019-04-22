@@ -6,18 +6,6 @@ const fetch = require('node-fetch');
 const legacyMoves = require('./legacyMoves.js');
 const shinyPokemon = require('./shinyPokemon.js');
 
-// ***************************************
-// BIG TODO:
-// REWRITE DEX SCRAPER TO UTILIZE THIS FILE INSTEAD:
-// https://raw.githubusercontent.com/pokemongo-dev-contrib/pokemongo-json-pokedex/master/output/pokemon.json
-// MOVES FROM THIS:
-// https://github.com/pokemongo-dev-contrib/pokemongo-json-pokedex/blob/master/output/move.json
-// AND ADD DEX ENTRIES FROM:
-// https://github.com/pokemongo-dev-contrib/pokemongo-json-pokedex/blob/master/output/locales/en-US/pokemon.json
-// SHINY AVAILABLE: (fetch.text() clean js and JSON.parse())
-// https://raw.githubusercontent.com/Rplus/Pokemon-shiny/blob/master/pms.js
-// ***************************************
-
 // MasterParser class
 module.exports = class MasterParser {
 
@@ -121,22 +109,6 @@ module.exports = class MasterParser {
           this.dex[num].shiny = true;
       });
   }
-
-  // updateMoves({templateId, pokemonSettings}) {
-  //   const num = MasterParser.num(templateId);
-  //   for (let moveType of [["quickMoves", "fast"], ["cinematicMoves", "charge"]]) {
-  //     const existingMoves = this.dex[num].moves[moveType[1]].map(m => m.name);
-  //     for (let specialMove of pokemonSettings[moveType[0]]) {
-  //       const cleanMove = specialMove.replace(/_fast/i, "");
-  //       if (existingMoves.indexOf(cleanMove) === -1) {
-  //         this.dex[num].moves[moveType[1]].push({
-  //           ...this.moves[specialMove],
-  //           "legacy": true
-  //         });
-  //       }
-  //     }
-  //   }
-  // }
 
   static name({pokemonId}) {
     return pokemonId
