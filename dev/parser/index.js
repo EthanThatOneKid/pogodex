@@ -1,21 +1,17 @@
 // Dependencies
-// const MasterParser = require('./MasterParser.js');
-const legacyMoves = require('./legacyMoves.js');
+const MasterParser = require('./MasterParser.js');
 
 // Main Process
 (async () => {
+  
+  const mp = new MasterParser();
 
-  await legacyMoves();
+  console.log("Scraping Pokemon Go Master data file...");
+  await mp.init();
 
-  // const mp = new MasterParser();
-  //
-  // console.log("Scraping Pokemon Go Master data file...");
-  // await mp.init();
-  //
-  // console.log("Saving data...");
-  // mp.save(`${process.cwd()}/src/db/`);
+  console.log("Saving data...");
+  mp.save(`${process.cwd()}/src/db/`);
 
-  console.log("All done!!!")
   process.exit();
 
 })();

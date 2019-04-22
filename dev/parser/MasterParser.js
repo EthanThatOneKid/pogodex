@@ -1,15 +1,10 @@
 // Dependencies
 const fs = require('fs');
 const fetch = require('node-fetch');
-const cheerio = require('cheerio');
 
 // Helpers
-const specials = require('./specials.js');
-/*
-  pkmn legacy move puppeteer scraper from:
-  https://pokemongo.gamepress.gg/legacy-pokemon-move-list
-  using sel: '#sort-table > tbody'
-*/
+const legacyMoves = require('./legacyMoves.js');
+const shinyPokemon = require('./shinyPokemon.js');
 
 // ***************************************
 // BIG TODO:
@@ -78,18 +73,17 @@ module.exports = class MasterParser {
           "moves": this.lookupMoves(pokemonSettings),
           "thirdMove": pokemonSettings.thirdMove,
           "buddyDistance": pokemonSettings.kmBuddyDistance,
-          "icon": `https://assets.thesilphroad.com/img/pokemon/icons/96x96/${num}.png`
+          "icon": `https://assets.thesilphroad.com/img/pokemon/icons/96x96/${num}.png`,
+          "shiny": false
         };
         return dex;
       }, {});
 
-      for (let specialName of specials) {
-        const specialUrl = `https://raw.githubusercontent.com/pokemongo-dev-contrib/pokemongo-game-master/master/special/${specialName}`;
-        const specialRequest = await fetch(specialUrl);
-        const specialData = await specialRequest.json();
-        for (let itemTemplate of specialData.itemTemplates)
-          this.updateMoves(itemTemplate);
-      }
+    const gimmeLegacyMoves = await legacyMoves();
+    this.registerLegacyMoves(gimmeLegacyMoves);
+
+    const gimmeShinyPokemon = await shinyPokemon();
+    this.registerShinyPokemon(gimmeShinyPokemon);
 
     this.registered = true;
     return this.dex;
@@ -97,30 +91,48 @@ module.exports = class MasterParser {
   }
 
   lookupMoves(pokemonSettings) {
-    const lookup = s => Object.assign(this.moves[s], {"event": false}),
+    const lookup = s => Object.assign(this.moves[s], {"legacy": false}),
           hasQuickMoves  = pokemonSettings.hasOwnProperty("quickMoves"),
           hasChargeMoves = pokemonSettings.hasOwnProperty("cinematicMoves");
     return {
-      "quick": hasQuickMoves ? pokemonSettings.quickMoves.map(lookup) : [],
+      "fast": hasQuickMoves ? pokemonSettings.quickMoves.map(lookup) : [],
       "charge": hasChargeMoves ? pokemonSettings.cinematicMoves.map(lookup) : [],
     };
   }
 
-  updateMoves({templateId, pokemonSettings}) {
-    const num = MasterParser.num(templateId);
-    for (let moveType of [["quickMoves", "quick"], ["cinematicMoves", "charge"]]) {
-      const existingMoves = this.dex[num].moves[moveType[1]].map(m => m.name);
-      for (let specialMove of pokemonSettings[moveType[0]]) {
-        const cleanMove = specialMove.replace(/_fast/i, "");
-        if (existingMoves.indexOf(cleanMove) === -1) {
-          this.dex[num].moves[moveType[1]].push({
-            ...this.moves[specialMove],
-            "event": true
-          });
-        }
-      }
-    }
+  registerLegacyMoves(moves) {
+    Object.entries(moves)
+      .forEach(([num, moves]) => {
+        moves
+          .forEach(([name, type]) => {
+            this.dex[num].moves[type].push(name);
+          })
+      });
   }
+
+  registerShinyPokemon(nums) {
+    nums
+      .forEach(num => {
+        if (!!Number(num))
+          this.dex[num].shiny = true;
+      });
+  }
+
+  // updateMoves({templateId, pokemonSettings}) {
+  //   const num = MasterParser.num(templateId);
+  //   for (let moveType of [["quickMoves", "fast"], ["cinematicMoves", "charge"]]) {
+  //     const existingMoves = this.dex[num].moves[moveType[1]].map(m => m.name);
+  //     for (let specialMove of pokemonSettings[moveType[0]]) {
+  //       const cleanMove = specialMove.replace(/_fast/i, "");
+  //       if (existingMoves.indexOf(cleanMove) === -1) {
+  //         this.dex[num].moves[moveType[1]].push({
+  //           ...this.moves[specialMove],
+  //           "legacy": true
+  //         });
+  //       }
+  //     }
+  //   }
+  // }
 
   static name({pokemonId}) {
     return pokemonId
