@@ -18,6 +18,7 @@ export default class Entry extends Component {
     this.data = this.props.data;
     this.grad = colors[this.data.types[0]];
     this.state = {"display": true};
+    console.log(this.data)
   }
 
   toggle(display) {
@@ -53,7 +54,7 @@ export default class Entry extends Component {
 
             <section>
               <p>fast attacks:</p>
-              {this.data.moves.quick.map(m => <Move data={m}/>)}
+              {this.data.moves.fast.map(m => <Move data={m}/>)}
               <p>charge moves:</p>
               {this.data.moves.charge.map(m => <Move data={m}/>)}
             </section>

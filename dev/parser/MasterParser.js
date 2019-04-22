@@ -105,7 +105,11 @@ module.exports = class MasterParser {
       .forEach(([num, moves]) => {
         moves
           .forEach(([name, type]) => {
-            this.dex[num].moves[type].push(name);
+            if (type == "fast") name += "_FAST";
+            this.dex[num].moves[type].push({
+              ...this.moves[name],
+              "legacy": true
+            });
           })
       });
   }

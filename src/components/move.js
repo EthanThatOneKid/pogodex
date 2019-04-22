@@ -15,7 +15,7 @@ export default class Move extends Component {
   }
 
   render() {
-    const name = `${this.data.name}${this.data.event ? " ℰ" : ""}`;
+    const name = `${this.data.name}${this.data.legacy ? " ℰ" : ""}`;
     const svg = `https://img.shields.io/badge/${name}-${this.data.power}-${this.color}.svg?logo=${types[this.data.type]}`;
     return (
       <img src={svg}></img>
