@@ -4,7 +4,7 @@ Pokedex for Pokemon Go with stats and data straight from the source!
 ## Features
 ### MasterParser
 Run `npm run scrape` from the root of this repository.
-This will scrape the latest version of the Pokemon Go Master file and will save it as `src/db/latest.json` to be used in the app. The code for the parser can be found [here](dev/parser/). Notice: the [`specials.js`](dev/parser/specials.js) file must be updated each time there is a special in-game event.
+This will scrape the latest version of the Pokemon Go Master file and will save it as `src/db/latest.json` to be used in the app. The code for the parser can be found [here](dev/parser/).
 
 ## Deployment
 ### Heroku
