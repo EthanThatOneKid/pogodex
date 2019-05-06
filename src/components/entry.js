@@ -8,6 +8,7 @@ import colors from './helpers/colors.js';
 import Type from './type.js';
 import Move from './move.js';
 import Stats from './stats.js';
+import Shine from './shine.js';
 import EvolutionBranch from './evolution-branch.js';
 
 // Export Component
@@ -18,7 +19,6 @@ export default class Entry extends Component {
     this.data = this.props.data;
     this.grad = colors[this.data.types[0]];
     this.state = {"display": true};
-    console.log(this.data)
   }
 
   toggle(display) {
@@ -40,6 +40,7 @@ export default class Entry extends Component {
           <summary>
             <img className="icon" src={this.data.icon}></img>
             {this.data.name}
+            <Shine data={this.data.shiny}/>
           </summary>
           <div>
 

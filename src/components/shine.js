@@ -6,9 +6,7 @@ export default class Shine extends Component {
 
   constructor(props) {
     super(props);
-    this.data = this.props.data.shiny;
-    this.color = colors[this.data][0];
-    this.logo = types[this.data];
+    this.data = this.props.data;
   }
 
   render() {

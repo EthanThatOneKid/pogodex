@@ -11,7 +11,7 @@ export default class Stats extends Component {
 
   render() {
     return (
-      <table>
+      <table align="center">
         <tbody>
           {
             Object.entries(this.data)
