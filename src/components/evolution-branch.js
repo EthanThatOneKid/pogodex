@@ -16,7 +16,7 @@ export default class EvolutionBranch extends Component {
 
   render() {
     return (
-      <p>
+      <p key="evolution-branch">
         {
           this.evolutionMethod
             .map(([displayName, key, clean], i) => {

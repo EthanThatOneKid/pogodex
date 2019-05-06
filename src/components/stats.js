@@ -11,13 +11,13 @@ export default class Stats extends Component {
 
   render() {
     return (
-      <table align="center">
+      <table key="stats">
         <tbody>
           {
             Object.entries(this.data)
               .map(([stat, value]) => {
                 return (
-                  <tr>
+                  <tr key={stat}>
                     <td><b>{stat}</b></td>
                     <td>{value}</td>
                   </tr>

@@ -31,13 +31,18 @@ export default class Entry extends Component {
     const style = {
       "div": {
         "backgroundImage": `radial-gradient(#${this.grad[0]}, #${this.grad[1]})`,
+        "maxWidth": "96px",
+        "maxHeight": "117px",
         "display": this.state.display ? "inline-block" : "none"
+      },
+      "summary": {
+        "textAlign": "center"
       }
     };
     return (
       <div className="entry" id={this.data.name} style={style.div}>
         <details>
-          <summary>
+          <summary style={style.summary}>
             <img className="icon" src={this.data.icon}></img>
             {this.data.name}
             <Shine data={this.data.shiny}/>

@@ -14,8 +14,14 @@ export default class App extends Component {
   }
 
   render() {
-    return Object.values(dex)
-      .map(p => <Entry data={p}/>);
+    return (
+      <div>
+        {
+          Object.values(dex)
+            .map(p => <Entry data={p}/>)
+        }
+      </div>
+    );
   }
 
 }
