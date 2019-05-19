@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 
 // Globals
-const port = 9000;
+const port = process.env.PORT || 80;
 
 // Main Process
 (() => {
