@@ -20,10 +20,11 @@ export default class EvolutionBranch extends Component {
         {
           this.evolutionMethod
             .map(([displayName, key, clean], i) => {
-              const value = clean(this.data[key]);
-              const src = `https://img.shields.io/badge/${displayName}-${value}-green.svg`;
-              const plus = (i + 1 < this.evolutionMethod.length) ? "+" : "";
-              return <span><img src={src}></img>{plus}</span>;
+              const value = clean(this.data[key]),
+                    src = `https://img.shields.io/badge/${displayName}-${value}-green.svg`,
+                    plus = (i + 1 < this.evolutionMethod.length) ? "+" : "",
+                    alt = `${displayName} ${plus}`;
+              return <span><img src={src} alt={alt}></img>{plus}</span>;
             })
         }
         <span> → <a href={`#${this.data.evolution}`}>{this.data.evolution}</a></span>

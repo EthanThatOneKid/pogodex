@@ -43,7 +43,7 @@ export default class Entry extends Component {
       <div className="entry" id={this.data.name} style={style.div}>
         <details>
           <summary style={style.summary}>
-            <img className="icon" src={this.data.icon}></img>
+            <img className="icon" alt={this.data.name} src={this.data.icon}></img>
             {this.data.name}
             <Shine data={this.data.shiny}/>
           </summary>

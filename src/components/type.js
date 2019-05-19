@@ -16,8 +16,9 @@ export default class Type extends Component {
   }
 
   render() {
-    const src = `https://img.shields.io/badge/type-${this.data}-${this.color}.svg?logo=${this.logo}`;
-    return <img src={src}></img>;
+    const src = `https://img.shields.io/badge/type-${this.data}-${this.color}.svg?logo=${this.logo}`,
+          alt = `${this.data}-type`;
+    return <img src={src} alt={alt}></img>;
   }
 
 }
