@@ -24,11 +24,17 @@ module.exports = async () => {
     };
     return [...tbody.children]
       .map(tr => {
-        const num = tr.children[0].children[0].href.split("/").pop();
-        const moves = [
-          ...getMoves(tr.children[1]).map(m => [m, "fast"]),
-          ...getMoves(tr.children[2]).map(m => [m, "charge"])
-        ];
+        let num, moves;
+        try {
+          num = tr.children[0].children[0].href.split("/").pop();
+          moves = [
+            ...getMoves(tr.children[1]).map(m => [m, "fast"]),
+            ...getMoves(tr.children[2]).map(m => [m, "charge"])
+          ];
+        } catch (err) {
+          console.log(`Dex #${num}`, err);
+        }
+
         return {num, moves};
       })
       .reduce((acc, {num, moves}) => {
