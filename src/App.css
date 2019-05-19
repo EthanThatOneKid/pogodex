@@ -1,14 +1,19 @@
-.App {
+body {
+  background-color: rgb(51, 51, 51);
+}
+
+table, tbody, tr {
   margin: 0 auto;
+  width: 100%;
+}
+
+td {
+  margin: 0 auto;
+  width: 33%;
 }
 
 details > summary::-webkit-details-marker {
   display: none;
-}
-
-.entry {
-  display: inline-block;
-  //text-align: center;
 }
 
 .icon {

@@ -29,10 +29,8 @@ export default class Entry extends Component {
     let style = {
       "div": {
         "backgroundImage": `radial-gradient(#${this.grad[0]}, #${this.grad[1]})`,
-        "display": "inline-block"
-        // "maxWidth": "96px",
-        // "maxHeight": "117px",
-        // "display": this.state.display ? "inline-block" : "none"
+        "display": "inline-block",
+        "width": "100%"
       },
       "summary": {
         "textAlign": "center"
@@ -41,17 +39,17 @@ export default class Entry extends Component {
     if (this.state.focus) {
       style.div = Object.assign(style.div, {
         "margin": 0,
-        "position": "absolute",
-        "top": "50%",
-        "left": "50%",
-        "marginRight": "-50%",
-        "transform": "translate(-50%, -50%)"
+        "position": "fixed",
+        "top": 0,
+        "left": 0,
+        "width": "100%",
+        "height": "100%"
       });
     }
     return (
-      <div className="entry" id={this.data.name} style={style.div} onClick={this.toggle}>
+      <div className="entry" id={this.data.name} style={style.div}>
         <details>
-          <summary style={style.summary}>
+          <summary style={style.summary} onClick={this.toggle}>
             <img className="icon" alt={this.data.name} src={this.data.icon}></img>
             {this.data.name}
             <Shine data={this.data.shiny}/>
