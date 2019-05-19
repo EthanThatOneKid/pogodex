@@ -12,7 +12,7 @@ export default class Stats extends Component {
   render() {
     return (
       <table key="stats">
-        <tbody>
+        <tbody align="center">
           {
             Object.entries(this.data)
               .map(([stat, value]) => {
