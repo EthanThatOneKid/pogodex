@@ -18,29 +18,38 @@ export default class Entry extends Component {
     super(props);
     this.data = this.props.data;
     this.grad = colors[this.data.types[0]];
-    this.state = {"display": true};
+    this.state = {focus: false};
   }
 
-  toggle(display) {
-    this.setState({
-      "display": display // !this.state.display
-    });
+  toggle = () => {
+    this.setState(state => ({focus: !state.focus}));
   }
 
   render() {
-    const style = {
+    let style = {
       "div": {
         "backgroundImage": `radial-gradient(#${this.grad[0]}, #${this.grad[1]})`,
-        "maxWidth": "96px",
-        "maxHeight": "117px",
-        "display": this.state.display ? "inline-block" : "none"
+        "display": "inline-block"
+        // "maxWidth": "96px",
+        // "maxHeight": "117px",
+        // "display": this.state.display ? "inline-block" : "none"
       },
       "summary": {
         "textAlign": "center"
       }
     };
+    if (this.state.focus) {
+      style.div = Object.assign(style.div, {
+        "margin": 0,
+        "position": "absolute",
+        "top": "50%",
+        "left": "50%",
+        "marginRight": "-50%",
+        "transform": "translate(-50%, -50%)"
+      });
+    }
     return (
-      <div className="entry" id={this.data.name} style={style.div}>
+      <div className="entry" id={this.data.name} style={style.div} onClick={this.toggle}>
         <details>
           <summary style={style.summary}>
             <img className="icon" alt={this.data.name} src={this.data.icon}></img>
