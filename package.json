@@ -1,6 +1,7 @@
 {
   "name": "pogodex",
   "version": "0.1.0",
+  "homepage": "http://ethanthatonekid.github.io/pogodex",
   "private": true,
   "dependencies": {
     "react": "^16.8.6",
