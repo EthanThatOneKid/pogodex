@@ -1,10 +1,6 @@
 // Dependencies
 import React, {Component} from 'react';
 
-// Helpers
-
-// Components
-
 // Export Component
 export default class Entry extends Component {
 
@@ -14,9 +10,9 @@ export default class Entry extends Component {
     };
     return (
       <input
-        name="query"
         type="text"
-        placeHolder="search..."
+        placeholder="search..."
+        rel="noopener noreferrer"
         style={style}
         onChange={this.props.onSearch}
       />

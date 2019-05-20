@@ -7,54 +7,71 @@ import dex from './db/latest.json';
 import Entry from './components/entry.js';
 import DexSearch from './components/dexsearch.js';
 
+// Helpers
+const initDex = (filterNums = []) => {
+  return Object.values(dex)
+    .reduce((acc, cur, i) => {
+      if (filterNums.indexOf(i) === -1) {
+        if (i % 3 === 0) acc.push([cur]);
+        else acc[acc.length - 1].push(cur);
+      }
+      return acc;
+    }, []);
+};
+
 // Export Component
 export default class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {data: {}};
-    this.initDex();
-  }
-
-  initDex(filterNums = []) {
-    this.state.data = Object.values(dex)
-      .reduce((acc, cur, i) => {
-        if (filterNums.indexOf(i) === -1) {
-          if (i % 3 === 0) acc.push([cur]);
-          else acc[acc.length - 1].push(cur);
-        }
-        return acc;
-      }, []);
+    this.state = {data: initDex()};
   }
 
   updateList(event) {
-    const {query} = event;
-    // filter out using query
+    console.log(this)
+    const {value: query} = event.target;
+    if (!query.length) {
+      this.stateChange({data: initDex()});
+    } else {
+      this.stateChange(({data}) => {
+        return {
+          "data": data.filter((pkmn, i) => {
+            console.log(pkmn)
+          })
+        };
+      });
+    }
   }
 
   render() {
+
     const style = {
       "header": {
         "height": "109px",
         "width": "100%",
         "color": "white"
       },
-      "title": {},
+      "title": {
+        "fontSize": "48pt",
+        "margin": 0
+      },
       "githubIcon": {
-        "width": 24,
-        "height": 24
+        "width": 24
       }
     };
+
+    const searchListener = event => this.updateList.bind(this, event)();
+
     return (
       <div>
 
         <header style={style.header}>
-          <table><tbody><tr><td>
+          <table><tbody><tr>/*<td>
+            <DexSearch onSearch={searchListener}/>
+          </td>*/<td>
             <h1 style={style.title}>Pogodex</h1>
           </td><td>
-            <DexSearch onSearch={this.updateList}/>
-          </td><td>
-            <a href="#" target="_blank">
+            <a href="https://github.com/EthanThatOneKid/pogodex" target="_blank">
               <img style={style.githubIcon} src="https://simpleicons.org/icons/github.svg" alt="GitHub Icon"></img>
             </a>
           </td></tr></tbody></table>
@@ -87,6 +104,7 @@ export default class App extends Component {
 
       </div>
     );
+
   }
 
 }

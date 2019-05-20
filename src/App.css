@@ -7,6 +7,10 @@ table, tbody, tr {
   width: 100%;
 }
 
+header td {
+  text-align: center;
+}
+
 td {
   margin: 0 auto;
   width: 33%;
