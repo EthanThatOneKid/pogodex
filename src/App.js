@@ -28,7 +28,6 @@ export default class App extends Component {
   }
 
   updateList(event) {
-    console.log(this)
     const {value: query} = event.target;
     if (!query.length) {
       this.stateChange({data: initDex()});
@@ -36,7 +35,7 @@ export default class App extends Component {
       this.stateChange(({data}) => {
         return {
           "data": data.filter((pkmn, i) => {
-            console.log(pkmn)
+            console.log(pkmn, i)
           })
         };
       });
@@ -60,15 +59,13 @@ export default class App extends Component {
       }
     };
 
-    const searchListener = event => this.updateList.bind(this, event)();
-
     return (
       <div>
 
         <header style={style.header}>
-          <table><tbody><tr>/*<td>
-            <DexSearch onSearch={searchListener}/>
-          </td>*/<td>
+          <table><tbody><tr><td>
+            <DexSearch onSearch={this.updateList}/>
+          </td><td>
             <h1 style={style.title}>Pogodex</h1>
           </td><td>
             <a href="https://github.com/EthanThatOneKid/pogodex" target="_blank">
