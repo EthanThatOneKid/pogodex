@@ -35,7 +35,7 @@ export default class App extends Component {
       this.stateChange(({data}) => {
         return {
           "data": data.filter((pkmn, i) => {
-            console.log(pkmn, i)
+            console.log(pkmn, i);
           })
         };
       });
