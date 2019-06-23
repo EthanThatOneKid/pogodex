@@ -5,7 +5,6 @@ import dex from './db/latest.json';
 
 // Components
 import Entry from './components/entry.js';
-// import DexSearch from './components/dexsearch.js';
 
 // Helpers
 const initDex = (searchResults = []) => {
@@ -47,7 +46,6 @@ export default class App extends Component {
           return acc;
         }, []);
       const siftedDex = initDex(queryMatches);
-      console.log({siftedDex});
       this.setState({"data": siftedDex});
     }
   }
