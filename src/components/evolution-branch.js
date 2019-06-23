@@ -24,7 +24,12 @@ export default class EvolutionBranch extends Component {
                     src = `https://img.shields.io/badge/${displayName}-${value}-green.svg`,
                     plus = (i + 1 < this.evolutionMethod.length) ? "+" : "",
                     alt = `${displayName} ${plus}`;
-              return <span><img src={src} alt={alt}></img>{plus}</span>;
+              return (
+                <span key={`evomethod-${i}`}>
+                  <img src={src} alt={alt}></img>
+                  {plus}
+                </span>
+              );
             })
         }
         <span> → <a href={`#${this.data.evolution}`}>{this.data.evolution}</a></span>
