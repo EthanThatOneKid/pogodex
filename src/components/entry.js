@@ -60,7 +60,7 @@ export default class Entry extends Component {
 
           <table><tbody align="center"><tr>
             <td>
-              {this.data.types.map(t => <Type data={t}/>)}
+              {this.data.types.map((t, i) => <Type data={t} key={i}/>)}
             </td>
           </tr><tr>
             <td>
@@ -70,14 +70,14 @@ export default class Entry extends Component {
           </tr><tr>
             <td>
               <p>fast attacks:</p>
-              {this.data.moves.fast.map(m => <Move data={m}/>)}
+              {this.data.moves.fast.map((m, i) => <Move data={m} key={`fast-${i}`}/>)}
               <p>charge moves:</p>
-              {this.data.moves.charge.map(m => <Move data={m}/>)}
+              {this.data.moves.charge.map((m, i) => <Move data={m} key={`charge-${i}`}/>)}
             </td>
           </tr><tr>
             <td>
               {(!!this.data.evolution.length) ? <p>evolution:</p> : <></>}
-              {this.data.evolution.map(e => <EvolutionBranch data={e}/>)}
+              {this.data.evolution.map((e, i) => <EvolutionBranch data={e} key={`evo-${i}`}/>)}
             </td>
           </tr></tbody></table>
 
