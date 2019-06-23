@@ -5,15 +5,21 @@ import dex from './db/latest.json';
 
 // Components
 import Entry from './components/entry.js';
-import DexSearch from './components/dexsearch.js';
+// import DexSearch from './components/dexsearch.js';
 
 // Helpers
-const initDex = (filterNums = []) => {
-  return Object.values(dex)
+const initDex = (searchResults = []) => {
+  let result = Object.values(dex);
+  if (!!searchResults.length) {
+    result = result
+      .filter((pkmn, i) => searchResults.includes(i));
+  }
+  return result
     .reduce((acc, cur, i) => {
-      if (filterNums.indexOf(i) === -1) {
-        if (i % 3 === 0) acc.push([cur]);
-        else acc[acc.length - 1].push(cur);
+      if (i % 3 === 0) {
+        acc.push([cur]);
+      } else {
+        acc[acc.length - 1].push(cur);
       }
       return acc;
     }, []);
@@ -24,21 +30,25 @@ export default class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {data: initDex()};
+    this.state = {"data": initDex()};
   }
 
   updateList(event) {
-    const {value: query} = event.target;
+    const query = event.target.value.toUpperCase();
     if (!query.length) {
-      this.stateChange({data: initDex()});
+      this.setState({data: initDex()});
     } else {
-      this.stateChange(({data}) => {
-        return {
-          "data": data.filter((pkmn, i) => {
-            console.log(pkmn, i);
-          })
-        };
-      });
+      const queryMatches = Object.values(dex)
+        .reduce((acc, pkmn, i) => {
+          const isMatch = pkmn.name.includes(query) || pkmn.types.map(type => type.toUpperCase()).some(type => type.includes(query));
+          if (isMatch) {
+            acc.push(i);
+          }
+          return acc;
+        }, []);
+      const siftedDex = initDex(queryMatches);
+      console.log({siftedDex});
+      this.setState({"data": siftedDex});
     }
   }
 
@@ -54,6 +64,9 @@ export default class App extends Component {
         "fontSize": "48pt",
         "margin": 0
       },
+      "search": {
+        "display": "inline-block"
+      },
       "githubIcon": {
         "width": 24
       }
@@ -64,11 +77,17 @@ export default class App extends Component {
 
         <header style={style.header}>
           <table><tbody><tr><td>
-            <DexSearch onSearch={this.updateList}/>
+            <input
+              type="text"
+              placeholder="search..."
+              style={style.search}
+              rel="noopener noreferrer"
+              onChange={this.updateList.bind(this)}
+            />
           </td><td>
             <h1 style={style.title}>Pogodex</h1>
           </td><td>
-            <a href="https://github.com/EthanThatOneKid/pogodex" target="_blank">
+            <a href="https://github.com/EthanThatOneKid/pogodex" target="_blank" rel="noopener noreferrer">
               <img style={style.githubIcon} src="https://simpleicons.org/icons/github.svg" alt="GitHub Icon"></img>
             </a>
           </td></tr></tbody></table>
@@ -78,22 +97,21 @@ export default class App extends Component {
           <tbody>
             {
               this.state.data
-                .map(row => {
+                .map((row, rowIndex) => {
                   return (
-                    <tr>
+                    <tr key={`row-${rowIndex}`}>
                       {
                         row
-                          .map(pkmn => {
+                          .map((pkmn, colIndex) => {
                             return (
-                              <td>
-                                <Entry data={pkmn}/>
+                              <td key={`(${colIndex},${rowIndex})`}>
+                                <Entry data={pkmn} key={pkmn.name}/>
                               </td>
-                            )
-
+                            );
                           })
                       }
                     </tr>
-                  )
+                  );
                 })
             }
           </tbody>
