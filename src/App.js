@@ -1,5 +1,6 @@
 // Dependencies
 import React, {Component} from 'react';
+import GithubCorner from 'react-github-corner';
 import './App.css';
 import dex from './db/latest.json';
 
@@ -85,9 +86,7 @@ export default class App extends Component {
           </td><td>
             <h1 style={style.title}>Pogodex</h1>
           </td><td>
-            <a href="https://github.com/EthanThatOneKid/pogodex" target="_blank" rel="noopener noreferrer">
-              <img style={style.githubIcon} src="https://simpleicons.org/icons/github.svg" alt="GitHub Icon"></img>
-            </a>
+            <GithubCorner href="https://github.com/EthanThatOneKid/pogodex"/>
           </td></tr></tbody></table>
         </header>
 
