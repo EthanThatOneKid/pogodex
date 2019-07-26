@@ -16,6 +16,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prod": "node index.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "scrape": "node dev/parser/index.js"
   },
   "eslintConfig": {
@@ -28,6 +30,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "gh-pages": "^2.0.1",
     "node-fetch": "^2.3.0",
     "puppeteer": "^1.14.0"
   }
