@@ -30,7 +30,8 @@ export default class Entry extends Component {
       "div": {
         "backgroundImage": `radial-gradient(#${this.grad[0]}, #${this.grad[1]})`,
         "display": "inline-block",
-        "width": "100%"
+        "width": "100%",
+        "border-radius": "10px"
       },
       "summary": {
         "textAlign": "center"
@@ -54,7 +55,8 @@ export default class Entry extends Component {
 
           <summary style={style.summary} onClick={this.toggle}>
             <img className="icon" alt={this.data.name} src={this.data.icon}></img>
-            {this.data.name}
+            <br></br>
+            <span>{this.data.name}</span>
             <Shine data={this.data.shiny}/>
           </summary>
 

@@ -53,41 +53,24 @@ export default class App extends Component {
 
   render() {
 
-    const style = {
-      "header": {
-        "height": "109px",
-        "width": "100%",
-        "color": "white"
-      },
-      "title": {
-        "fontSize": "48pt",
-        "margin": 0
-      },
-      "search": {
-        "display": "inline-block"
-      },
-      "githubIcon": {
-        "width": 24
-      }
-    };
-
     return (
       <div>
 
-        <header style={style.header}>
-          <table><tbody><tr><td>
-            <input
-              type="text"
-              placeholder="search..."
-              style={style.search}
-              rel="noopener noreferrer"
-              onChange={this.updateList.bind(this)}
-            />
-          </td><td>
-            <h1 style={style.title}>Pogodex</h1>
-          </td><td>
-            <GithubCorner href="https://github.com/EthanThatOneKid/pogodex"/>
-          </td></tr></tbody></table>
+        <GithubCorner
+          href="https://github.com/EthanThatOneKid/pogodex"
+          octoColor="#333333"
+          bannerColor="#fff"
+        />
+
+        <header class="page-header">
+          <h1 class="page-title">Pogodex</h1>
+          <input
+            class="page-search"
+            type="text"
+            placeholder="search..."
+            rel="noopener noreferrer"
+            onChange={this.updateList.bind(this)}
+          />
         </header>
 
         <table>
