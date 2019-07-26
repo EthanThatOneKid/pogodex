@@ -97,6 +97,19 @@ export default class App extends Component {
           </tbody>
         </table>
 
+        <footer class="page-header">
+          <small>
+            Engineered with 💖 by © EthanThatOneKid {(new Date()).getFullYear()}
+          </small>
+          <br></br>
+          <small>
+            <a href="https://www.reddit.com/user/ethanthatonekid">u/EthanThatOneKid</a>
+            {" | "}
+            <a href="https://www.github.com/ethanthatonekid">@EthanThatOneKid</a>
+          </small>
+
+        </footer>
+
       </div>
     );
 

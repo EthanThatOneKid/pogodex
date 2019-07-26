@@ -38,3 +38,7 @@ details > summary::-webkit-details-marker {
   border-radius: 10px;
   padding: 10px;
 }
+
+small {
+  color: white;
+}
