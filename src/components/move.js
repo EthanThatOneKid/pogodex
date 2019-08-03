@@ -13,10 +13,11 @@ export default class Move extends Component {
     super(props);
     this.data = this.props.data;
     this.color = colors[this.data.type][0];
+    this.icon = types[this.data.type];
   }
 
   render() {
     const name = `${this.data.name}${this.data.legacy ? " ℰ" : ""}`;
-    return <KeyVal k={name} v={this.data.power} c={this.color}></KeyVal>;
+    return <KeyVal k={name} v={this.data.power} c={this.color} i={this.icon}></KeyVal>;
   }
 }

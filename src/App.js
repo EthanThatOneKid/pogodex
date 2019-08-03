@@ -99,7 +99,7 @@ export default class App extends Component {
 
         <footer class="page-header">
           <small>
-            Engineered with 💖 by © EthanThatOneKid {(new Date()).getFullYear()}
+            Engineered with <span role="img" aria-label="luv">💖</span> by © EthanThatOneKid {(new Date()).getFullYear()}
           </small>
           <br></br>
           <small>

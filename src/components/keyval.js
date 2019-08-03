@@ -42,7 +42,7 @@ export default class KeyVal extends Component {
       <span style={style.container}>
         <span style={{...style.spanspan, ...style.spanleft}}>{
           !!this.ico
-            ? <img src={this.ico} style={style.ico}></img>
+            ? <img src={this.ico} style={style.ico} alt={`${this.key}:${this.val}`}></img>
             : <span></span>
         }<b>{this.key}</b></span><span style={{...style.spanspan, ...style.spanright}}>{this.val}</span>
       </span>
