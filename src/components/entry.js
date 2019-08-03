@@ -78,7 +78,7 @@ export default class Entry extends Component {
             </td>
           </tr><tr>
             <td>
-              {(!!this.data.evolution.length) ? <p>evolution:</p> : <></>}
+              {(!!this.data.evolution.length) ? <p>evolution:</p> : <span></span>}
               {this.data.evolution.map((e, i) => <EvolutionBranch data={e} key={`evo-${i}`}/>)}
             </td>
           </tr></tbody></table>

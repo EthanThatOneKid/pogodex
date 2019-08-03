@@ -1,5 +1,6 @@
 // Dependencies
 import React, {Component} from 'react';
+import KeyVal from './keyval';
 
 // Export Component
 export default class EvolutionBranch extends Component {
@@ -21,12 +22,10 @@ export default class EvolutionBranch extends Component {
           this.evolutionMethod
             .map(([displayName, key, clean], i) => {
               const value = clean(this.data[key]),
-                    src = `https://img.shields.io/badge/${displayName}-${value}-green.svg`,
-                    plus = (i + 1 < this.evolutionMethod.length) ? "+" : "",
-                    alt = `${displayName} ${plus}`;
+                    plus = (i + 1 < this.evolutionMethod.length) ? "+" : "";
               return (
                 <span key={`evomethod-${i}`}>
-                  <img src={src} alt={alt}></img>
+                  <KeyVal k={displayName} v={value}></KeyVal>
                   {plus}
                 </span>
               );

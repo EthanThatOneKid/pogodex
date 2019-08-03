@@ -1,5 +1,6 @@
 // Dependencies
 import React, {Component} from 'react';
+import KeyVal from './keyval';
 
 // Helpers
 import colors from './helpers/colors.js';
@@ -16,9 +17,7 @@ export default class Type extends Component {
   }
 
   render() {
-    const src = `https://img.shields.io/badge/type-${this.data}-${this.color}.svg?logo=${this.logo}`,
-          alt = `${this.data}-type`;
-    return <img src={src} alt={alt}></img>;
+    return <KeyVal k="type" v={this.data} c={this.color} i={this.logo}></KeyVal>;
   }
 
 }

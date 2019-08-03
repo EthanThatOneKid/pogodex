@@ -1,5 +1,6 @@
 // Dependencies
 import React, {Component} from 'react';
+import KeyVal from './keyval';
 
 // Export Component
 export default class Stats extends Component {
@@ -11,21 +12,12 @@ export default class Stats extends Component {
 
   render() {
     return (
-      <table key="stats">
-        <tbody align="center">
-          {
-            Object.entries(this.data)
-              .map(([stat, value]) => {
-                return (
-                  <tr key={stat}>
-                    <td><b>{stat}</b></td>
-                    <td>{value}</td>
-                  </tr>
-                );
-              })
-          }
-        </tbody>
-      </table>
+      <div>
+        {
+          Object.entries(this.data)
+            .map(([stat, value]) => <KeyVal k={stat} v={value}></KeyVal>)
+        }
+      </div>
     );
   }
 }

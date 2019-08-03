@@ -1,5 +1,6 @@
 // Dependencies
 import React, {Component} from 'react';
+import KeyVal from './keyval';
 
 // Helpers
 import colors from './helpers/colors.js';
@@ -15,11 +16,7 @@ export default class Move extends Component {
   }
 
   render() {
-    const name = `${this.data.name}${this.data.legacy ? " ℰ" : ""}`,
-          svg = `https://img.shields.io/badge/${name}-${this.data.power}-${this.color}.svg?logo=${types[this.data.type]}`,
-          alt = `${this.data.name} attack`;
-    return (
-      <img src={svg} alt={alt}></img>
-    );
+    const name = `${this.data.name}${this.data.legacy ? " ℰ" : ""}`;
+    return <KeyVal k={name} v={this.data.power} c={this.color}></KeyVal>;
   }
 }
