@@ -27,6 +27,7 @@ export default class KeyVal extends Component {
       spanspan: {
         padding: "5px",
         border: `1px solid ${this.bgc}`
+        // whiteSpace: "nowrap"
       },
       spanleft: {
         backgroundColor: !!this.col ? `#${this.col}` : this.bgc,
