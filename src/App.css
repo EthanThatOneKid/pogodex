@@ -42,3 +42,15 @@ details > summary::-webkit-details-marker {
 small {
   color: white;
 }
+
+@media (max-width: 430px) {
+
+  img {
+    width: 50px;
+  }
+
+  summary {
+    font-size: 10pt;
+  }
+
+}

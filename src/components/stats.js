@@ -15,7 +15,7 @@ export default class Stats extends Component {
       <div>
         {
           Object.entries(this.data)
-            .map(([stat, value]) => <KeyVal k={stat} v={value}></KeyVal>)
+            .map(([stat, value], i) => <KeyVal k={stat} v={value} key={i}></KeyVal>)
         }
       </div>
     );

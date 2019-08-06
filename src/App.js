@@ -62,10 +62,10 @@ export default class App extends Component {
           bannerColor="#fff"
         />
 
-        <header class="page-header">
-          <h1 class="page-title">Pogodex</h1>
+      <header className="page-header">
+          <h1 className="page-title">Pogodex</h1>
           <input
-            class="page-search"
+            className="page-search"
             type="text"
             placeholder="search..."
             rel="noopener noreferrer"
@@ -97,7 +97,7 @@ export default class App extends Component {
           </tbody>
         </table>
 
-        <footer class="page-header">
+        <footer className="page-header">
           <small>
             Engineered with <span role="img" aria-label="luv">💖</span> by © EthanThatOneKid {(new Date()).getFullYear()}
           </small>

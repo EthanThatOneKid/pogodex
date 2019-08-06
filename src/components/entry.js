@@ -31,7 +31,7 @@ export default class Entry extends Component {
         "backgroundImage": `radial-gradient(#${this.grad[0]}, #${this.grad[1]})`,
         "display": "inline-block",
         "width": "100%",
-        "border-radius": "10px"
+        "borderRadius": "10px"
       },
       "summary": {
         "textAlign": "center"
