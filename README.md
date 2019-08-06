@@ -26,6 +26,9 @@ The build is minified and the filenames include the hashes.
 Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## Deploying as GitHub Page
+Run `npm run predeploy` and then run `npm run deploy`. All this given that the dev dependency `gh-pages` is installed.
+
 ---
 
 Engineered with 💙 by EthanThatOneKid
