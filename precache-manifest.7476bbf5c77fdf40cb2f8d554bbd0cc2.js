@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/pogodex/static/js/runtime~main.6f26ca8e.js"
   },
   {
-    "revision": "64d8ee2da9a83611454c",
-    "url": "/pogodex/static/js/main.ab1e4167.chunk.js"
+    "revision": "f5d1633d5eed726e2bf6",
+    "url": "/pogodex/static/js/main.d20d3a00.chunk.js"
   },
   {
     "revision": "91139ae78529869b0b93",
     "url": "/pogodex/static/js/2.8423f25b.chunk.js"
   },
   {
-    "revision": "64d8ee2da9a83611454c",
-    "url": "/pogodex/static/css/main.c579a950.chunk.css"
+    "revision": "f5d1633d5eed726e2bf6",
+    "url": "/pogodex/static/css/main.6da20144.chunk.css"
   },
   {
-    "revision": "f36aa8059acb89d6ae179286635a1fb1",
+    "revision": "0ab56eb1dd2b1456ee43aaf9c0ce61ba",
     "url": "/pogodex/index.html"
   }
 ];
