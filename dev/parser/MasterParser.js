@@ -27,23 +27,19 @@ module.exports = class MasterParser {
     const masterRequest = await fetch(masterUrl);
     const master = await masterRequest.json();
 
-    this.moves = master["itemTemplates"]
-    .filter(({templateId}) => {
-      return templateId.includes("COMBAT_") &&
-             !templateId.includes("LEAGUE") &&
-             !templateId.includes("SETTINGS");
-    })
-    .reduce((moves, {combatMove}) => {
-      const move = combatMove.uniqueId;
-      moves[move] = {
-        "type": combatMove.type.split("_").pop().toLowerCase(),
-        "name": move.replace(/_fast/i, ""),
-        "power": combatMove.power
-      };
-      return moves;
-    }, {});
+    this.moves = master.itemTemplates
+      .filter(({templateId}) => templateId.match(/COMBAT_V\d{4}_MOVE/))
+      .reduce((moves, {combatMove}) => {
+        const move = combatMove.uniqueId;
+        moves[move] = {
+          "type": combatMove.type.split("_").pop().toLowerCase(),
+          "name": move.replace(/_fast/i, ""),
+          "power": combatMove.power
+        };
+        return moves;
+      }, {});
 
-    this.dex = master["itemTemplates"]
+    this.dex = master.itemTemplates
       .filter(({templateId}) => {
         return templateId.includes("_POKEMON_") &&
                templateId.includes("V0") &&
