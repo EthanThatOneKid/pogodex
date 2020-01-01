@@ -1,13 +1,13 @@
 {
-  "main.css": "/pogodex/static/css/main.6da20144.chunk.css",
-  "main.js": "/pogodex/static/js/main.d20d3a00.chunk.js",
-  "main.js.map": "/pogodex/static/js/main.d20d3a00.chunk.js.map",
+  "main.css": "/pogodex/static/css/main.c579a950.chunk.css",
+  "main.js": "/pogodex/static/js/main.712177af.chunk.js",
+  "main.js.map": "/pogodex/static/js/main.712177af.chunk.js.map",
   "runtime~main.js": "/pogodex/static/js/runtime~main.6f26ca8e.js",
   "runtime~main.js.map": "/pogodex/static/js/runtime~main.6f26ca8e.js.map",
   "static/js/2.8423f25b.chunk.js": "/pogodex/static/js/2.8423f25b.chunk.js",
   "static/js/2.8423f25b.chunk.js.map": "/pogodex/static/js/2.8423f25b.chunk.js.map",
   "index.html": "/pogodex/index.html",
-  "precache-manifest.7476bbf5c77fdf40cb2f8d554bbd0cc2.js": "/pogodex/precache-manifest.7476bbf5c77fdf40cb2f8d554bbd0cc2.js",
+  "precache-manifest.0b77534cddb59bec11c7ba11ed9c7026.js": "/pogodex/precache-manifest.0b77534cddb59bec11c7ba11ed9c7026.js",
   "service-worker.js": "/pogodex/service-worker.js",
-  "static/css/main.6da20144.chunk.css.map": "/pogodex/static/css/main.6da20144.chunk.css.map"
+  "static/css/main.c579a950.chunk.css.map": "/pogodex/static/css/main.c579a950.chunk.css.map"
 }
