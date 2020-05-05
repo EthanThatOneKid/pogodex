@@ -29,6 +29,9 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## Deploying as GitHub Page
 Run `npm run predeploy` and then run `npm run deploy`. All this given that the dev dependency `gh-pages` is installed.
 
+## Where the Data Comes From
+* [Game Master](https://github.com/pokemongo-dev-contrib/pokemongo-game-master/tree/master/versions/latest)
+* [Shiny Data](https://github.com/Rplus/Pokemon-shiny/blob/master/assets/pms.json)
 ---
 
 Engineered with 💙 by EthanThatOneKid
