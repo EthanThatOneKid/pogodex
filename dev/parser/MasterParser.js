@@ -27,7 +27,7 @@ module.exports = class MasterParser {
     const masterRequest = await fetch(masterUrl);
     const master = await masterRequest.json();
 
-    this.moves = [...master.itemTemplates]
+    this.moves = [...master.itemTemplate]
       .filter(({templateId}) => templateId.match(/COMBAT_V\d{4}_MOVE/))
       .reduce((moves, {combatMove}) => {
         const move = combatMove.uniqueId;
@@ -39,14 +39,15 @@ module.exports = class MasterParser {
         return moves;
       }, {});
 
-    this.dex = master.itemTemplates
+    this.dex = master.itemTemplate
       .filter(({templateId}) => {
         return templateId.includes("_POKEMON_") &&
                templateId.includes("V0") &&
                !templateId.includes("SPAWN") &&
                !templateId.includes("FORMS");
       })
-      .reduce((dex, {templateId, pokemonSettings}) => {
+      .reduce((dex, config) => {
+        const {templateId, pokemon: pokemonSettings} = config;
         const num = MasterParser.num(templateId);
         dex[num] = {
           "name": MasterParser.name(pokemonSettings),
@@ -106,8 +107,8 @@ module.exports = class MasterParser {
       });
   }
 
-  static name({pokemonId}) {
-    return pokemonId
+  static name({uniqueId}) {
+    return uniqueId
       .replace(/_MALE/i, " ♂")
       .replace(/_FEMALE/i, " ♀");
   }
@@ -134,7 +135,7 @@ module.exports = class MasterParser {
   }
 
   static types(pokemonSettings) {
-    const types = [pokemonSettings.type];
+    const types = [pokemonSettings.type1];
     if (pokemonSettings.hasOwnProperty("type2"))
       types.push(pokemonSettings.type2);
     return types
