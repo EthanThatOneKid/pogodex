@@ -27,7 +27,7 @@ module.exports = class MasterParser {
     const masterRequest = await fetch(masterUrl);
     const master = await masterRequest.json();
 
-    this.moves = master.itemTemplates
+    this.moves = [...master.itemTemplates]
       .filter(({templateId}) => templateId.match(/COMBAT_V\d{4}_MOVE/))
       .reduce((moves, {combatMove}) => {
         const move = combatMove.uniqueId;
