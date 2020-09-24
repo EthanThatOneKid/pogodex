@@ -23,23 +23,24 @@ module.exports = class MasterParser {
 
   async init() {
 
-    const masterUrl = "https://raw.githubusercontent.com/pokemongo-dev-contrib/pokemongo-game-master/master/versions/latest/GAME_MASTER.json";
+    const masterUrl = "https://raw.githubusercontent.com/pokemongo-dev-contrib/pokemongo-game-master/master/versions/latest/V2_GAME_MASTER.json";
     const masterRequest = await fetch(masterUrl);
     const master = await masterRequest.json();
 
-    this.moves = [...master.itemTemplate]
+    this.moves = [...master.template]
       .filter(({templateId}) => templateId.match(/COMBAT_V\d{4}_MOVE/))
       .reduce((moves, {combatMove}) => {
-        const move = combatMove.uniqueId;
-        moves[move] = {
-          "type": combatMove.type.split("_").pop().toLowerCase(),
-          "name": move.replace(/_fast/i, ""),
-          "power": combatMove.power
-        };
+        if (combatMove && combatMove.uniqueId) {
+          moves[combatMove.uniqueId] = {
+            "type": combatMove.type.split("_").pop().toLowerCase(),
+            "name": move.replace(/_fast/i, ""),
+            "power": combatMove.power
+          };
+        }
         return moves;
       }, {});
 
-    this.dex = master.itemTemplate
+    this.dex = master.template
       .filter(({templateId}) => {
         return templateId.includes("_POKEMON_") &&
                templateId.includes("V0") &&
@@ -49,18 +50,21 @@ module.exports = class MasterParser {
       .reduce((dex, config) => {
         const {templateId, pokemon: pokemonSettings} = config;
         const num = MasterParser.num(templateId);
-        dex[num] = {
-          "name": MasterParser.name(pokemonSettings),
-          "candy": MasterParser.candy(pokemonSettings),
-          "types": MasterParser.types(pokemonSettings),
-          "stats": MasterParser.stats(pokemonSettings),
-          "evolution": MasterParser.evolution(pokemonSettings),
-          "moves": this.lookupMoves(pokemonSettings),
-          "thirdMove": pokemonSettings.thirdMove,
-          "buddyDistance": pokemonSettings.kmBuddyDistance,
-          "icon": `https://assets.thesilphroad.com/img/pokemon/icons/96x96/${num}.png`,
-          "shiny": false
-        };
+        const name = MasterParser.name(pokemonSettings);
+        if (name) {
+          dex[num] = {
+            "name": MasterParser.name(pokemonSettings),
+            "candy": MasterParser.candy(pokemonSettings),
+            "types": MasterParser.types(pokemonSettings),
+            "stats": MasterParser.stats(pokemonSettings),
+            "evolution": MasterParser.evolution(pokemonSettings),
+            "moves": this.lookupMoves(pokemonSettings),
+            "thirdMove": pokemonSettings.thirdMove,
+            "buddyDistance": pokemonSettings.kmBuddyDistance,
+            "icon": `https://assets.thesilphroad.com/img/pokemon/icons/96x96/${num}.png`,
+            "shiny": false
+          };
+        }
         return dex;
       }, {});
 
@@ -107,10 +111,12 @@ module.exports = class MasterParser {
       });
   }
 
-  static name({uniqueId}) {
-    return uniqueId
-      .replace(/_MALE/i, " ♂")
-      .replace(/_FEMALE/i, " ♀");
+  static name(pokemonSettings) {
+    if (pokemonSettings && pokemonSettings.uniqueId) {
+      return uniqueId
+        .replace(/_MALE/i, " ♂")
+        .replace(/_FEMALE/i, " ♀");
+    }
   }
 
   static evolution(pokemonSettings) {
